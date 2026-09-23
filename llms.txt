@@ -1,0 +1,130 @@
+# 메리츠증권 Open API Studio
+
+> 터미널에서 바로 쓰는 `meritz` 명령과, AI 에이전트가 이 API를 제대로 쓰도록 안내하는 스킬 2종을 담았습니다.
+
+`meritz` CLI로 API를 찾고, 명세를 보고, 실제로 호출합니다. 조회·연속조회·주문·실시간
+예제 4종이 함께 들어 있습니다. 앱키(App Key)와 시크릿(App Secret)은 개발자 포털에서
+발급받으셔야 하고, 설치에는 uv 를 권합니다.
+
+## 시작
+
+- [README.md](README.md): 설치·명령 목록·환경변수·주문 확인 절차
+- [DISCLAIMER.md](DISCLAIMER.md): 확인 절차의 한계를 포함한 사용 전 안내
+- [SECURITY.md](SECURITY.md): 앱키 취급과 취약점 제보
+
+## 명령
+
+- `meritz doctor`: 서버·자격증명·카탈로그·토큰 발급을 한 번에 점검
+- `meritz api list -q <키워드>`: API 찾기. 한글로 찾으셔도 됩니다
+- `meritz api show <api_type>`: 필수 항목·코드값·응답 필드
+- `meritz call <api_type>`: 조회 호출
+- `meritz order <api_type>`: 주문·환전 (미리보기 → 확인 → 전송)
+- `meritz ws <api_type> --tr-key <키>`: 실시간 구독. `websocket-client`가 따로 필요합니다
+  (`uv tool install "git+https://github.com/meritz-securities/open-api-studio[realtime]"`).
+  PyPI 에는 올라가 있지 않으므로 `pip install meritz-openapi-studio` 는 되지 않습니다
+- `meritz token`: 토큰 발급 확인
+- `meritz skills list` / `meritz skills install`: 동봉된 스킬 보기·설치
+
+## 예제
+
+- [examples/README.md](examples/README.md): 예제 실행 방법
+- [examples/01_quote.py](examples/01_quote.py): 현재가 조회 — 응답 판정까지
+- [examples/02_paging.py](examples/02_paging.py): 연속 조회
+- [examples/03_order_with_confirm.py](examples/03_order_with_confirm.py): 주문 — 확인 없이는 전송되지 않는 형태
+- [examples/04_realtime.py](examples/04_realtime.py): 실시간 체결 구독
+
+## 스킬
+
+- [skills/meritz-openapi-trading/SKILL.md](skills/meritz-openapi-trading/SKILL.md): 실제로 조회하거나 주문할 때
+- [skills/meritz-openapi-codegen/SKILL.md](skills/meritz-openapi-codegen/SKILL.md): 호출 코드만 필요할 때
+- [build_skills.py](build_skills.py): 스킬이 참고하는 문서를 카탈로그에서 생성
+
+스킬마다 `references/` 아래에 `setup.md`(설치·앱키·서버 설정), `corrections.md`(포털
+명세가 실제와 다른 곳), `errors.md`(오류코드 해석), `api-catalog.md`(전체 목록),
+`glossary.md`(응답 필드 한/영)가 들어 있습니다.
+
+## 소스
+
+- [meritz_studio/cli.py](meritz_studio/cli.py): 명령 정의와 종료 코드
+- [meritz_studio/confirm_store.py](meritz_studio/confirm_store.py): 주문 확인 토큰 보관
+- [meritz_studio/core/client.py](meritz_studio/core/client.py): 토큰 관리·요청 전송·응답 판정
+- [meritz_studio/core/safety.py](meritz_studio/core/safety.py): 상태변경 판별과 확인 절차
+- [meritz_studio/core/search.py](meritz_studio/core/search.py): 한글 키워드 검색
+- [meritz_studio/data/catalog.json](meritz_studio/data/catalog.json): API 명세 (REST 62건·실시간 13건)
+- [meritz_studio/data/corrections.json](meritz_studio/data/corrections.json): API별 응답 처리 참고자료
+
+## 함께 보실 저장소
+
+- [open-api](https://github.com/meritz-securities/open-api): 파이썬 실행 예제
+- [open-api-mcp](https://github.com/meritz-securities/open-api-mcp): AI 에이전트에 붙이는 MCP 서버
+- [open-api-codegen-mcp](https://github.com/meritz-securities/open-api-codegen-mcp): 호출 코드를 만들어 주는 MCP 서버
+
+## AI Agent Guidance
+
+`meritz` CLI를 직접 실행하는 에이전트가 알아 두셔야 할 것들입니다.
+동봉된 스킬 2종에 같은 내용이 더 자세히 들어 있으니, 가능하면 스킬을 설치해
+쓰시기 바랍니다.
+
+**첫 호출 전에 `meritz doctor`를 한 번 돌리십시오.** 자격증명이 없으면 호출을 먼저
+시도하지 마시고 설치 안내부터 하십시오.
+
+**파라미터를 추측하지 마십시오.** `meritz api list -q <키워드>`로 API를 찾고
+`meritz api show <api_type>`으로 필수 항목과 코드값을 확인한 뒤 호출하십시오.
+
+**계좌 파라미터는 넣지 않습니다.** `acno`·`asno`·`acnt_pwd`는 앱키에 묶여 있어
+게이트웨이가 채웁니다. 사용자에게 계좌번호나 비밀번호를 묻지 마시고, `-p`로도
+넣지 마십시오.
+
+**종목코드 표기가 다릅니다.** 시세 조회는 `005930`, 주문은 `A005930`처럼 앞에 `A`가
+붙습니다. 사용자가 준 값을 그대로 옮기지 마시고 `meritz api show`로 확인하십시오.
+
+**"잔고"는 한 단어로 여러 가지를 뜻합니다.** 총자산·평가금액(`valuation`), 종목별
+보유와 평가손익(`holdings`), 현금·출금가능·주문가능(`deposit`), 해외 보유·외화
+잔고(`ovs_holdings`·`ovs_currencies`)가 각각 다릅니다. 애매하면 되물으십시오.
+
+**주문은 두 단계입니다.** `--confirm` 없이 실행하면 전송하지 않고 보낼 내용만
+보여 드립니다. 그 내용을 사람에게 보여 드리고 동의를 받은 뒤 `--confirm <토큰>`으로
+다시 실행해야 나갑니다. 토큰은 한 번만 쓸 수 있고 180초 뒤 만료되며, 요청 값이나
+대상 서버가 바뀌면 무효가 됩니다. 미리보기 출력에서 토큰만 읽어 곧바로 전송하는
+것은 확인이 아닙니다. `MERITZ_READ_ONLY`의 기본값은 `1`(조회 전용)이라, 그대로 두시면
+주문·환전이 막혀 있습니다. 주문까지 쓰셔야 한다면 `0`으로 두셔야 합니다.
+
+**종료 코드로 결과를 판정하십시오.** `0` 성공 / `2` 사용법 오류 / `3` 실패 /
+`4` 확인 필요 / `5` 주문 미접수입니다. 스크립트에서 그대로 쓰시면 됩니다.
+
+**응답은 이 순서로 봅니다.** HTTP 200이 왔다고 성공이 아닙니다. 주문이라면
+`warn_cls_code`를 먼저 보고, 그다음 `rsp_cd`를 읽고, 읽을 수 없으면 알려진 문제인지
+확인합니다. 성공으로 보는 코드는 `0000`·`0001`·`5762`·`5766`·`5820`·`5822`입니다.
+`5762`는 다음 페이지가 있다는 뜻이라 `tr_cont`·`tr_cont_key`로 이어서 조회하시면
+되고, `5820`·`5822`는 보통 자료 없음이라 오류가 아닙니다. **다만 `5820`을 "자료 없음"으로
+단정하지 마십시오** — 담보 조회·종목별 실현손익·해외 실현손익은 자료를 담은 채로도
+`5820`을 보냅니다. 자료 유무는 응답코드가 아니라 `data`가 비었는지로 판정하십시오.
+오류는 종류와 무관하게 HTTP 500으로 오고, 조치 정보는 `rsp_msg`가 아니라 `rsp_sub_msg`에
+담깁니다. 코드표는 스킬의 `references/errors.md` 또는 open-api 저장소의
+[docs/errors.md](https://github.com/meritz-securities/open-api/blob/main/docs/errors.md)를
+보십시오.
+
+**주문이 성공으로 와도 접수가 아닐 수 있습니다.** `rsp_cd`가 `0001`이라도
+`data.warn_cls_code`가 `0`이 아니면 아직 접수되지 않은 상태이고, CLI가 이를
+**실패로 처리**해 종료 코드 `5`를 돌려드립니다. 경고 내용을 사람에게 전하고
+`-p warn_cnfr_yn=A`를 더해 다시 보낼지 확인을 받으십시오. 국내와 해외는 경고 코드
+체계가 다르므로 한쪽 목록을 다른 쪽에 그대로 쓰지 마십시오.
+
+**실시간은 접속점이 하나입니다.** API마다 경로가 나뉘지 않고, 구독 메시지의
+`tr_cd`가 무엇을 받을지 정합니다. `meritz ws <api_type> --tr-key <키>`가 이를
+대신해 줍니다.
+
+**시세 호출 전에 알려진 차이를 확인하십시오.** (해외 시세의 필수 파라미터 누락은
+2026-09-11 기준 포털에서 해소됐습니다.) 국내 시세는 정상 데이터와 함께 `rsp_cd`가
+손상되어 옵니다.
+스킬의 `references/corrections.md` 또는
+[meritz_studio/data/corrections.json](meritz_studio/data/corrections.json)을 보십시오.
+
+**장 시간을 먼저 보십시오.** 개장 전에는 누적거래량이 0이고 시가·고가·저가가
+기준가와 같습니다. 그 값을 "현재가"라고 전하면 오해를 부르니, 개장 전이라는 점을
+밝혀 주십시오.
+
+**서버는 기본이 운영입니다.** 다른 서버로 옮기실 때는 `MERITZ_BASE_URL`과
+`MERITZ_WS_URL`을 **둘 다** 바꿔야 합니다. 한쪽만 바꾸면 토큰과 구독이 서로
+다른 서버로 나갑니다. 앱키에는 실계좌가 연결되어 있으니 모의계좌로 가정하지
+마십시오.
