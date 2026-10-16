@@ -1,0 +1,3355 @@
+{
+ "generated": "2026-10-16",
+ "apis": [
+  {
+   "api_type": "oauth2_token",
+   "name": "접근토큰 발급",
+   "category": "oauth2",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/oauth2/token",
+   "tr_id": "token",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "grant_type",
+     "name_ko": "권한부여 Type",
+     "required": true,
+     "description": "\"client_credentials\" 고정"
+    },
+    {
+     "name": "client_id",
+     "name_ko": "고객 앱 Key",
+     "required": true,
+     "description": "포탈에서 발급된 고객의 앱 Key"
+    },
+    {
+     "name": "client_secret",
+     "name_ko": "고객 앱 비밀 Key",
+     "required": true,
+     "description": "포탈에서 발급된 고객의 앱 비밀 Key"
+    },
+    {
+     "name": "scope",
+     "name_ko": "scope",
+     "required": true,
+     "description": "\"login\" 고정"
+    }
+   ]
+  },
+  {
+   "api_type": "oauth2_revoke",
+   "name": "접근토큰 폐기",
+   "category": "oauth2",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/oauth2/revoke",
+   "tr_id": "revoke",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "client_id",
+     "name_ko": "고객 앱 Key",
+     "required": true,
+     "description": "포털에서 발급받은 고객의 앱 Key 입니다."
+    },
+    {
+     "name": "client_secret",
+     "name_ko": "고객 앱 비밀 Key",
+     "required": true,
+     "description": "포탈에서 발급된 고객의 앱 비밀 Key"
+    },
+    {
+     "name": "token_type_hint",
+     "name_ko": "토큰 유형 hint",
+     "required": true,
+     "description": "폐기할 토큰의 종류입니다. \"access_token\" 을 넣으십시오."
+    },
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "폐기할 접근토큰입니다."
+    }
+   ]
+  },
+  {
+   "api_type": "collateral",
+   "name": "내 계좌 담보 현황 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/collateral",
+   "tr_id": "oblon_mntn_020r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "base_dt",
+     "name_ko": "기준일자",
+     "required": false,
+     "description": "조회 기준일자(YYYYMMDD)입니다. 선택 항목이며, 넣지 않거나 20200101·20991231 을 넣어도 같은 결과가 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "deposit",
+   "name": "내 계좌 예수금 상세 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/deposit",
+   "tr_id": "obacb_balc_024r",
+   "state_changing": false,
+   "params": []
+  },
+  {
+   "api_type": "transactions",
+   "name": "내 계좌 입출금 내역 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/transactions",
+   "tr_id": "obrtp_tran_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": true,
+     "description": "조회 시작일자(YYYYMMDD 여덟 자리)입니다. 필수 항목입니다. 기간 앞을 열어 두려면 \"00000000\" 을 넣으십시오. 계좌의 처음부터 조회됩니다. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자(YYYYMMDD 여덟 자리)입니다. 선택 항목입니다. (query string)"
+    },
+    {
+     "name": "sort",
+     "name_ko": "정렬 구분",
+     "required": false,
+     "description": "정렬 순서입니다. \"DES\": 최신순 \"ASC\": 과거순 대문자로 입력하십시오. 소문자를 넣으시면 오류 없이 과거순으로 조회됩니다. 미지정 시에도 과거순입니다. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. 연속조회 키(tr_cont_key)와 함께 보내십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않으며 tr_cont 에 \"1\" 을 함께 보냅니다. 값 오른쪽에 공백이 붙어 내려오므로 잘라내지 말고 받은 그대로 URL 인코딩하여 보내십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "valuation",
+   "name": "내 계좌 자산평가 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/valuation",
+   "tr_id": "obacb_balc_105r",
+   "state_changing": false,
+   "params": []
+  },
+  {
+   "api_type": "holdings",
+   "name": "내 계좌 종목별 평가 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/holdings",
+   "tr_id": "obacb_balc_114r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "nthn_rmnd_incu_yn",
+     "name_ko": "무잔고포함여부",
+     "required": false,
+     "description": "무잔고포함여부입니다. \"Y\" 또는 \"N\" 을 넣습니다. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 정확히 \"1\" 을 넣습니다. 첫 조회에는 넣지 않습니다. 연속조회 키(tr_cont_key)와 반드시 함께 보내십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 한 글자도 바꾸지 말고 그대로 URL 인코딩하여 넣습니다. 첫 조회에는 넣지 않습니다. tr_cont 에 \"1\" 을 함께 보내십시오. 키를 바꾸면 오류 없이 첫 페이지가 다시 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "valuation_by_asset",
+   "name": "내 계좌 자산별 평가금액 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/valuation/by-asset",
+   "tr_id": "obacb_balc_154r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "aset_cls_code",
+     "name_ko": "자산구분코드",
+     "required": true,
+     "description": "조회할 자산군입니다. 2자리로 입력합니다. \"00\" 총자산 · \"01\" 국내주식 · \"02\" 해외주식 · \"03\" 국내CFD · \"04\" 해외CFD · \"05\" 채권 · \"06\" CMA · \"07\" 펀드 · \"08\" ELS/DLS · \"09\" 국내파생 · \"10\" 외화 및 기타상품 · \"11\" 원화예수금 · \"12\" 신용 및 대출 (query string)"
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": false,
+     "description": "거래소 구분 코드입니다. 2자리로 입력합니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "orders_buy",
+   "name": "일반주문 매수",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/orders/buy",
+   "tr_id": "obtrs_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가 시장가 주문(oder_cls_code \"05\")은 0을 입력합니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"83\": 스톱지정가 \"84\": 중간가"
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": false,
+     "description": "신규 주문에는 원주문이 없으므로 0을 넣습니다."
+    },
+    {
+     "name": "whol_rctf_cncl_yn",
+     "name_ko": "전체정정취소여부",
+     "required": false,
+     "description": "신규 주문에는 해당하지 않으므로 \"N\"을 넣습니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 항목을 \"Y\"로 바꿔 재전송합니다."
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱지정가 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "orders_sell",
+   "name": "일반주문 매도",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/orders/sell",
+   "tr_id": "obtrs_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가 시장가 주문(oder_cls_code \"05\")은 0을 입력합니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"83\": 스톱지정가 \"84\": 중간가"
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": false,
+     "description": "신규 주문에는 원주문이 없으므로 0을 넣습니다."
+    },
+    {
+     "name": "whol_rctf_cncl_yn",
+     "name_ko": "전체정정취소여부",
+     "required": false,
+     "description": "신규 주문에는 해당하지 않으므로 \"N\"을 넣습니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청을 \"Y\"로 재전송합니다."
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱지정가 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "credit_orders_buy",
+   "name": "신용매수 주문",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/credit-orders/buy",
+   "tr_id": "obtrs_oder_201a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "loan_oder_cls_code",
+     "name_ko": "대출주문구분코드",
+     "required": true,
+     "description": "대출 재원 구분 \"01\": 신용융자 \"03\": 예탁담보"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가 시장가 주문(oder_cls_code \"05\")은 0을 입력합니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "loan_date",
+     "name_ko": "대출일자",
+     "required": false,
+     "description": "매수는 상환할 대출 건이 없으므로 빈 문자열을 넣습니다."
+    },
+    {
+     "name": "loan_srno",
+     "name_ko": "대출일련번호",
+     "required": false,
+     "description": "매수는 1을 넣습니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"83\": 스톱지정가 \"84\": 중간가 \"83\"(스톱지정가)은 aspr_cond_prc 에 감시 가격을 함께 입력합니다."
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 항목을 바꿔 재전송합니다."
+    },
+    {
+     "name": "whol_amt_rdmp_yn",
+     "name_ko": "전체금액상환여부",
+     "required": false,
+     "description": "매수는 상환이 아니므로 \"N\"을 넣습니다."
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "credit_orders_sell",
+   "name": "신용매도 주문",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/credit-orders/sell",
+   "tr_id": "obtrs_oder_201a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "loan_oder_cls_code",
+     "name_ko": "대출주문구분코드",
+     "required": true,
+     "description": "대출 재원 구분입니다. \"01\": 신용융자 \"03\": 예탁담보"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가 시장가 주문(oder_cls_code \"05\")은 0을 입력합니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "loan_date",
+     "name_ko": "대출일자",
+     "required": false,
+     "description": "상환할 대출 건의 대출 일자를 YYYYMMDD 형식으로 넣습니다."
+    },
+    {
+     "name": "loan_srno",
+     "name_ko": "대출일련번호",
+     "required": false,
+     "description": "상환할 대출 건의 일련번호입니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"83\": 스톱지정가 \"84\": 중간가 \"83\"(스톱지정가)은 aspr_cond_prc 에 감시 가격을 함께 입력합니다."
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청을 \"Y\"로 재전송합니다."
+    },
+    {
+     "name": "whol_amt_rdmp_yn",
+     "name_ko": "전체금액상환여부",
+     "required": false,
+     "description": "전체 금액 상환 여부 \"Y\": 대출 전액을 상환하도록 매도 \"N\": 입력한 수량만 매도"
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "orders_modify",
+   "name": "국내주식 주문 정정",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/orders/modify",
+   "tr_id": "obtrs_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "정정 후 단가를 입력합니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "정정할 수량을 입력합니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"83\": 스톱지정가 \"84\": 중간가"
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": true,
+     "description": "정정할 주문의 번호를 입력합니다. 주문 접수 응답 또는 주문내역 조회의 oder_no 입니다."
+    },
+    {
+     "name": "whol_rctf_cncl_yn",
+     "name_ko": "전체정정취소여부",
+     "required": true,
+     "description": "전체 정정 여부 \"Y\": 전체 \"N\": 부분"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청을 \"Y\"로 재전송합니다."
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱지정가 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "orders_cancel",
+   "name": "국내주식 주문 취소",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/orders/cancel",
+   "tr_id": "obtrs_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 6자리 숫자입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": false,
+     "description": "주문 단가입니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": false,
+     "description": "취소할 수량을 입력합니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": false,
+     "description": "취소 시에는 생략할 수 있습니다. 넣을 때는 원주문의 주문구분코드를 그대로 넣으십시오. \"01\" 보통 · \"05\" 시장가 · \"06\" 조건부지정가 · \"12\" 최유리지정가 · \"13\" 최우선지정가 · \"61\" 장전시간외 · \"71\" 장후시간외 · \"83\" 스톱지정가 · \"84\" 중간가"
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": false,
+     "description": "주문 조건 구분 코드 \"0\": 일반 \"3\": IOC \"4\": FOK"
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": true,
+     "description": "취소할 주문의 번호를 입력합니다. 주문 접수 응답 또는 주문내역 조회의 oder_no 입니다."
+    },
+    {
+     "name": "whol_rctf_cncl_yn",
+     "name_ko": "전체정정취소여부",
+     "required": true,
+     "description": "전체 취소 여부 \"Y\": 전체 \"N\": 부분"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 최초 요청은 \"N\"으로 보내거나 넣지 않습니다. 응답의 warn_cls_code가 경고 값(\"1\" \"3\" \"4\" \"6\" \"7\" \"9\" \"a\" \"c\" \"d\" \"f\" \"g\")이면 warn_msg 내용을 확인한 뒤 같은 요청을 \"Y\"로 재전송합니다."
+    },
+    {
+     "name": "exch_kind_code",
+     "name_ko": "거래소종류코드",
+     "required": true,
+     "description": "거래소 종류 코드 \"01\": KRX \"02\": NXT \"03\": SOR"
+    },
+    {
+     "name": "aspr_cond_prc",
+     "name_ko": "호가조건가격",
+     "required": false,
+     "description": "스톱지정가 주문(oder_cls_code \"83\")에서 감시할 가격을 입력합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "orders_estimate",
+   "name": "주문가능금액·수량 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/orders/estimate",
+   "tr_id": "obtrs_comn_413r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 주식은 \"A\" + 단축코드 6자리 입니다. (예: A005930)"
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가를 입력합니다. 주문구분코드에 따라 넣을 값이 정해져 있습니다. 시장가 계열(\"05\" \"12\" \"13\" \"61\" \"71\" \"84\") ― 반드시 0 을 넣으십시오. 0 이 아니면 \"3180\" 으로 거부됩니다. 지정가 계열(\"01\" \"81\" \"83\") ― 0 보다 큰 단가를 넣으십시오. 0 이나 음수는 \"5980\" 으로 거부됩니다. \"06\" 조건부지정가 ― 어느 값을 넣어도 오류가 없고 결과도 같습니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분입니다. \"01\": 보통(지정가) \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 \"61\": 장전시간외 \"71\": 장후시간외 \"81\": 시간외단일가 \"83\": 스톱지정가 \"84\": 중간가 위 목록에 없는 두 자리 값은 오류 없이 \"01\"(지정가)로 처리되므로 값을 임의로 만들어 넣지 마십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "orders_history",
+   "name": "주문내역 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/orders/history",
+   "tr_id": "obtrs_comn_615r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "oder_date",
+     "name_ko": "주문일자",
+     "required": true,
+     "description": "조회할 주문 일자를 YYYYMMDD 8자리로 입력합니다. (예: 20260818) 달력에 없는 날짜(예: \"20260231\")는 rsp_cd \"6102\" 오류로 거부됩니다. 휴장일은 오류가 아니라 \"5820\" 과 0건이 내려옵니다. 하루 단위로만 조회되므로 기간으로 보려면 영업일마다 나누어 호출하십시오."
+    },
+    {
+     "name": "deal_cls_code",
+     "name_ko": "매매구분코드",
+     "required": true,
+     "description": "매매 구분입니다. \"0\": 전체 \"1\": 매도 \"2\": 매수 위 세 값만 받으며, 그 밖의 값(예: \"3\")은 \"5018\" 오류입니다. (query string)"
+    },
+    {
+     "name": "cntg_cls_code",
+     "name_ko": "체결구분코드",
+     "required": true,
+     "description": "체결 여부로 걸러냅니다. \"0\": 전체 \"1\": 체결된 수량이 있는 주문 \"2\": 남은 수량이 있는 주문 목록 밖의 값(예: \"9\")은 \"5018\" 오류입니다. (query string)"
+    },
+    {
+     "name": "sort_stnd_code",
+     "name_ko": "정렬기준코드",
+     "required": false,
+     "description": "정렬 기준입니다. \"1\": 역순(최근 주문 먼저) \"2\": 주문순(접수 순서) (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": false,
+     "description": "특정 종목만 조회할 때 종목코드를 입력합니다. \"A005930\" 과 \"005930\" 모두 같은 결과로 조회되며 값 뒤에 공백이 붙어도 같습니다. 접두어 \"A\" 는 대문자만 인정되며, 소문자(\"a005930\")나 없는 종목코드는 오류 없이 \"5820\"(조회 결과 없음)이 내려옵니다. 입력하지 않으면 전체 종목을 조회합니다."
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청하실 때 \"1\" 을 넣습니다. 첫 조회에는 넣지 않습니다. tr_cont_key 와 함께 쿼리 스트링으로 보내십시오."
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 쿼리 스트링으로 보냅니다. 값 오른쪽에 공백이 붙어 내려오므로 잘라내지 말고 URL 인코딩하여 원본 그대로 보내십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "reserved_orders_buy",
+   "name": "국내주식 예약주문 매수",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/reserved-orders/buy",
+   "tr_id": "obtrs_oder_510a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 6자리입니다. (예: \"005930\")"
+    },
+    {
+     "name": "adod_type_code",
+     "name_ko": "예약주문유형코드",
+     "required": true,
+     "description": "예약주문 유형입니다. \"02\": 현금 매수 \"04\": 신용융자 매수 \"05\": 대주 매수 \"04\" \"05\" 는 loan_date 와 loan_srno 를 함께 넣으십시오. 이 API 는 매수 유형만 받습니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가입니다. 시장가 계열은 0 을 넣습니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 지정가 \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 시장가 계열은 oder_unpr 에 0 을 넣습니다."
+    },
+    {
+     "name": "loan_date",
+     "name_ko": "대출일자",
+     "required": false,
+     "description": "신용 거래일 때 대출일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "loan_srno",
+     "name_ko": "대출일련번호",
+     "required": false,
+     "description": "신용 거래일 때 대출일련번호입니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "착오매매 경고를 확인했는지 여부입니다. 기본은 \"N\" 입니다."
+    },
+    {
+     "name": "oder_rsev_cls_code",
+     "name_ko": "주문예약구분코드",
+     "required": true,
+     "description": "예약 방식입니다. \"1\": 일반예약, \"2\": 기간잔량, \"3\": 기간예약. \"2\" \"3\" 은 oder_sta_date · oder_fin_date 를 함께 넣으십시오."
+    },
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": false,
+     "description": "기간잔량(\"2\")·기간예약(\"3\")으로 예약하실 때 주문이 나가기 시작하는 일자입니다. YYYYMMDD 8자리로 넣으십시오."
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": false,
+     "description": "기간잔량(\"2\")·기간예약(\"3\")으로 예약하실 때 주문이 나가는 마지막 일자입니다. YYYYMMDD 8자리로 넣으십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "reserved_orders_sell",
+   "name": "국내주식 예약주문 매도",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/reserved-orders/sell",
+   "tr_id": "obtrs_oder_510a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 6자리입니다. (예: \"005930\")"
+    },
+    {
+     "name": "adod_type_code",
+     "name_ko": "예약주문유형코드",
+     "required": true,
+     "description": "예약주문 유형입니다. \"01\": 현금 매도 \"03\": 신용융자 매도 \"11\": 예탁담보 매도 \"12\": 소액담보 매도 \"13\": 대용 매도 \"03\" 은 loan_date · loan_srno 를 함께 넣으십시오."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "oder_unpr",
+     "name_ko": "주문단가",
+     "required": true,
+     "description": "주문 단가입니다. 시장가 계열은 0 을 넣습니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 지정가 \"05\": 시장가 \"06\": 조건부지정가 \"12\": 최유리지정가 \"13\": 최우선지정가 시장가 계열은 oder_unpr 에 0 을 넣습니다."
+    },
+    {
+     "name": "loan_date",
+     "name_ko": "대출일자",
+     "required": false,
+     "description": "신용 거래일 때 대출일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "loan_srno",
+     "name_ko": "대출일련번호",
+     "required": false,
+     "description": "신용 거래일 때 대출일련번호입니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "착오매매 경고를 확인했는지 여부입니다. 기본은 \"N\" 입니다."
+    },
+    {
+     "name": "oder_rsev_cls_code",
+     "name_ko": "주문예약구분코드",
+     "required": true,
+     "description": "예약 방식입니다. \"1\": 일반예약, \"2\": 기간잔량, \"3\": 기간예약. \"2\" \"3\" 은 oder_sta_date · oder_fin_date 를 함께 넣으십시오."
+    },
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": false,
+     "description": "기간잔량(\"2\")·기간예약(\"3\")으로 예약하실 때 주문이 나가기 시작하는 일자입니다. YYYYMMDD 8자리로 넣으십시오."
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": false,
+     "description": "기간잔량(\"2\")·기간예약(\"3\")으로 예약하실 때 주문이 나가는 마지막 일자입니다. YYYYMMDD 8자리로 넣으십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "reserved_orders_cancel",
+   "name": "국내주식 예약주문 취소",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/reserved-orders/cancel",
+   "tr_id": "obtrs_oder_510a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드 6자리입니다. (예: \"005930\")"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "착오매매 경고를 확인했는지 여부입니다. 기본은 \"N\" 입니다."
+    },
+    {
+     "name": "oder_rsev_mst_date",
+     "name_ko": "주문예약마스터일자",
+     "required": true,
+     "description": "취소할 예약의 등록 일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "oder_rsev_mst_no",
+     "name_ko": "주문예약마스터번호",
+     "required": true,
+     "description": "취소할 예약의 번호입니다."
+    }
+   ]
+  },
+  {
+   "api_type": "reserved_orders",
+   "name": "국내주식 예약주문 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/reserved-orders",
+   "tr_id": "obtrs_oder_511r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리로 입력합니다. 시작일자와 종료일자를 모두 넣으십시오. 시작일자에 \"00000000\" 을 넣으면 시작 제한 없이 계좌의 모든 이력이 내려옵니다. 종료일자에는 쓰지 마십시오. (query string)"
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리로 입력합니다. 반드시 넣으십시오. \"00000000\" 을 넣으면 오류 없이 빈 결과(rsp_cd \"5820\")가 내려옵니다. 기간 끝을 열어 두려면 충분히 뒤의 날짜(예: \"20991231\")를 넣으십시오. (query string)"
+    },
+    {
+     "name": "iqry_csnu",
+     "name_ko": "조회건수",
+     "required": false,
+     "description": "조회 건수 입력값입니다. 넣지 않으면 한 번에 30건이 내려옵니다. 응답의 tr_cont 가 \"1\" 이면 tr_cont_key 로 이어서 받으십시오. (query string)"
+    },
+    {
+     "name": "iqry_cls_code",
+     "name_ko": "조회구분코드",
+     "required": false,
+     "description": "조회 구분입니다. \"1\": 취소 가능 건만(cncl_cls_code \"01\"), \"2\": 전체(취소된 예약 포함). 항목을 빼면 전체가 조회됩니다. (query string)"
+    },
+    {
+     "name": "deal_cls_code",
+     "name_ko": "매매구분코드",
+     "required": false,
+     "description": "매매 구분입니다. \"0\": 전체 \"1\": 매도 \"2\": 매수 \"1\" 을 넣으시면 매도 예약만 내려옵니다. 항목을 빼시면 전체가 조회됩니다. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "이어서 조회할 때 직전 응답의 tr_cont_key 를 한 글자도 바꾸지 말고 그대로 넣고, tr_cont 에 \"1\" 을 함께 보내십시오. 첫 조회에는 넣지 않습니다. 오른쪽 공백은 자르지 말고 URL 인코딩하여 그대로 보내십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "profit_loss",
+   "name": "국내주식 실현손익 (일자별)",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/profit-loss",
+   "tr_id": "obtrs_cntg_538r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iqry_sta_date",
+     "name_ko": "조회시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 시작일자를 종료일자보다 뒤로 넣으시거나 미래 일자를 넣으시면 오류가 아니라 0건이 내려옵니다. 자료가 없어서 0건인 것과 기간을 거꾸로 넣어 0건인 것이 응답으로 구분되지 않으므로, 보내시기 전에 두 일자의 앞뒤를 확인하십시오. 기간 앞을 열어 두고 싶으시면 \"00000000\" 을 넣으십시오. 계좌의 처음부터 조회됩니다. (query string)"
+    },
+    {
+     "name": "iqry_fin_date",
+     "name_ko": "조회종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": false,
+     "description": "종목 코드입니다. \"A\" + 단축코드 6자리 12자리로 넣으십시오. 넣지 않으시면 전 종목을 조회합니다. (query string)"
+    },
+    {
+     "name": "crdt_expn_incu_yn",
+     "name_ko": "신용비용포함여부",
+     "required": false,
+     "description": "신용 비용 포함 여부입니다. \"Y\" 또는 \"N\" 을 넣으십시오. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 값 오른쪽에 공백이 붙어 내려오는 경우가 있습니다. 잘라내지 말고 URL 인코딩하여 원본 그대로 보내십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "profit_loss_symbols",
+   "name": "국내주식 실현손익 (종목별)",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/profit-loss/symbols",
+   "tr_id": "obtrs_cntg_540r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iqry_sta_date",
+     "name_ko": "조회시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 종료일자보다 뒤로 넣으셔도 오류가 나지 않습니다. 이때는 조회 완료와 같은 모양으로 0건이 내려오고, 앞뒤가 바뀌었다는 사실은 응답의 상세 메시지(rsp_sub_msg)에만 담깁니다. 자료가 없어서 0건인 것과 구분하시려면 그 값을 함께 확인하십시오. 기간 앞을 열어 두고 싶으시면 \"00000000\" 을 넣으십시오. 계좌의 처음부터 조회됩니다. (query string)"
+    },
+    {
+     "name": "iqry_fin_date",
+     "name_ko": "조회종료일자",
+     "required": true,
+     "description": "조회 종료일자(YYYYMMDD 여덟 자리)입니다. 반드시 넣으십시오. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": false,
+     "description": "종목 코드입니다. \"A\" + 단축코드 6자리 12자리로 넣으십시오. 넣지 않으시면 전 종목을 조회합니다. (query string)"
+    },
+    {
+     "name": "crdt_expn_incu_yn",
+     "name_ko": "신용비용포함여부",
+     "required": false,
+     "description": "신용 비용 포함 여부입니다. \"Y\" 또는 \"N\" 을 넣으십시오. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 받은 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 값 오른쪽에 공백이 붙어 내려오는 경우가 있으니 잘라내지 마십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "profit_loss_summary",
+   "name": "국내주식 실현손익 (합계)",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/profit-loss/summary",
+   "tr_id": "obtrs_cntg_537r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iqry_sta_date",
+     "name_ko": "조회시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 시작일자를 종료일자보다 뒤로 넣으셔도 오류가 나지 않습니다. 이때 응답코드는 조회 완료와 같은 \"5766\" 이고 합계의 모든 금액이 0 으로 채워져 내려오므로, 기간을 거꾸로 넣으신 것과 그 기간에 매매가 없었던 것이 응답으로 구분되지 않습니다. 보내시기 전에 두 일자의 앞뒤를 확인하십시오. 기간 앞을 열어 두고 싶으시면 \"00000000\" 을 넣으십시오. 계좌의 처음부터 합산됩니다. (query string)"
+    },
+    {
+     "name": "iqry_fin_date",
+     "name_ko": "조회종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 이 항목에 \"00000000\" 을 넣지 마십시오. 시작일자보다 작아져 합계가 모두 0 으로 내려옵니다. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": false,
+     "description": "종목 코드입니다. \"A\" + 단축코드 6자리 12자리로 넣으십시오. 넣지 않으시면 전 종목을 조회합니다. (query string)"
+    },
+    {
+     "name": "crdt_expn_incu_yn",
+     "name_ko": "신용비용포함여부",
+     "required": false,
+     "description": "신용 비용 포함 여부입니다. \"Y\" 또는 \"N\" 을 넣으십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "market_candles_days",
+   "name": "시세추이 조회(일봉)",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/candles/days",
+   "tr_id": "ohhts_1002_003r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 시세를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 위 세 값만 넣으십시오. NXT 에 상장되지 않은 종목을 \"NJ\" 로 조회하면 오류 없이 빈 배열이 내려옵니다."
+    },
+    {
+     "name": "exch_use_yn",
+     "name_ko": "종가 기준 구분",
+     "required": false,
+     "description": "종가를 어느 기준으로 받을지 정합니다. 넣지 않으면 \"Y\" 로 조회합니다. \"Y\": KRX 정규장 종가 \"N\": 애프터마켓(~20:00)까지 포함한 그날의 마지막 체결가 정규장 종가는 mrkt_div_code \"TJ\" 와 \"Y\" 를 함께 넣을 때만 내려옵니다. \"J\"·\"NJ\" 에서는 \"Y\" 와 \"N\" 의 결과가 같아서, \"J\" 에 \"Y\" 를 넣어도 애프터마켓까지 포함한 값이 내려옵니다. \"TJ\" 에서 \"Y\" 와 \"N\" 은 시가·고가·저가·종가·전일대비가 달라지고 거래량·거래대금은 같습니다."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 A 를 붙인 7자리(A005930)로 넣습니다."
+    },
+    {
+     "name": "mod_stpr_cls_code",
+     "name_ko": "수정주가구분코드",
+     "required": false,
+     "description": "수정주가 구분입니다. \"0\" 또는 \"1\" 을 넣습니다."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": false,
+     "description": "조회 시작일자입니다. YYYYMMDD 8자리이며 to 와 함께 넣으면 그 기간의 일봉이 내려오고, 기간은 최대 1년입니다. 기간 조회는 from 과 to 를 함께 넣어야 합니다. from 만 넣으면 그 날짜부터 과거 방향으로 40건, 둘 다 없으면 최신 40건이 내려옵니다."
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자입니다. YYYYMMDD 8자리이며 from 과 함께 넣습니다. to 만 넣으면 무시되고 최신 40건이 내려옵니다."
+    }
+   ]
+  },
+  {
+   "api_type": "market_candles_minutes",
+   "name": "시세추이 조회(분봉)",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/candles/minutes",
+   "tr_id": "ohhts_kapi_005r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 시세를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 A 를 붙인 7자리(A005930)로 넣으십시오. 형식이 맞지 않는 코드는 오류 없이 정상 응답코드로 처리될 수 있으며, 예를 들어 뒤에 문자가 붙은 \"A005930ZZZZZ\" 는 봉이 한 건만 내려옵니다. 결과가 비어 있거나 건수가 적으면 종목 코드부터 확인하십시오."
+    },
+    {
+     "name": "hour_cls_code",
+     "name_ko": "봉 간격",
+     "required": true,
+     "description": "봉 간격을 초 단위로 입력합니다. 15는 15초, 60은 1분, 3600은 1시간입니다. 반드시 넣으십시오. 해외는 해외주식 시세추이 조회(분봉)(/market/v1/overseas/candles/minutes)을 사용하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_investors",
+   "name": "종목별 투자자매매동향",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/investors",
+   "tr_id": "ohhts_1085_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "시장 구분입니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 \"TJ\" 로 조회해도 \"J\"(KRX)와 같은 자료가 내려옵니다. 위 세 값만 넣으십시오. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 A 를 붙인 7자리(A005930)로 넣으십시오."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리 숫자로 넣으십시오. (예: 20260901) 필수 항목입니다. 받은 자료가 요청한 기간인지 date 로 확인하십시오. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리 숫자로 넣으십시오. (예: 20260911) 필수 항목입니다. 받은 자료가 요청한 기간인지 date 로 확인하십시오. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "연속조회 여부입니다. 이 API 는 기간 전체가 한 번에 내려오며 응답에 tr_cont 가 담기지 않습니다. 값을 넣어 조회하면 빈 배열이 내려오므로 넣지 마십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "연속조회 키입니다. 이 API 는 응답에 연속조회 키가 내려오지 않으므로 보낼 필요가 없으며, tr_cont 와 함께 보내면 빈 배열이 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "market_investors_detail",
+   "name": "종목별  투자자매매동향 상세",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/investors/detail",
+   "tr_id": "ohhts_1086_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "시장 구분입니다. \"J\"(KRX)를 넣으십시오. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 A 를 붙인 7자리(A005930)로 넣으십시오."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리 숫자로 넣으십시오. (예: 20260901) 필수 항목입니다. 지나치게 이른 시작일을 넣으면 응답이 오지 않을 수 있으니, 자료가 있는 구간으로 넣으십시오. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리 숫자로 넣으십시오. (예: 20260911) 필수 항목입니다. 받은 자료가 요청한 기간인지 date 로 확인하십시오. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "연속조회 여부입니다. 이 API 는 기간 전체가 한 번에 내려오며 응답에 tr_cont 가 담기지 않습니다. 값을 넣어 조회하면 빈 배열이 내려오므로 넣지 마십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "연속조회 키입니다. 이 API 는 응답에 연속조회 키가 내려오지 않으므로 보낼 필요가 없으며, tr_cont 와 함께 보내면 빈 배열이 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "market_prices",
+   "name": "현재가 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/prices",
+   "tr_id": "ohhts_1001_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 시세를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 위 세 값만 넣으십시오. 그 밖의 값도 오류 없이 정상 응답코드로 내려올 수 있으므로 보내는 값을 먼저 확인하십시오."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 대문자 A 를 붙인 7자리(A005930)로 넣으십시오. 값 앞뒤의 공백은 무시됩니다. 표준코드(KR7005930003)·소문자 a(a005930)·등록되지 않은 코드는 오류 없이 정상 응답코드 \"0000\" 으로 내려오되 값이 비거나 0 입니다. 뒤에 문자가 더 붙은 값(예: A005930ZZZZZ)은 앞 7자리만 읽습니다. 응답의 단축종목코드(shrn_iscd)가 채워져 있는지 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_prices_after",
+   "name": "시간외 단일가 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/prices/after",
+   "tr_id": "ohhts_1181_002r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 시세를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 시간외 단일가는 \"J\" 로 조회하십시오. \"TJ\" 로 조회하면 단축종목코드(shrn_iscd)는 채워지지만 시간외단일가현재가(ovtm_untp_prpr)와 거래량(ovtm_untp_vol)이 0 인 응답이 정상 응답코드로 내려옵니다."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930)로 넣으십시오. 등록되지 않은 종목코드는 오류 없이 정상 응답코드로 내려올 수 있으므로, 응답의 단축종목코드(shrn_iscd)가 채워져 있는지 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_orderbook",
+   "name": "호가 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/orderbook",
+   "tr_id": "ohhts_1001_005r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 호가를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 위 세 값만 넣으십시오. 그 밖의 값도 오류 없이 정상 응답코드로 내려오므로 보내는 값을 먼저 확인하십시오."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930) 또는 대문자 A 를 붙인 7자리(A005930)로 넣으십시오. 등록되지 않은 종목코드도 오류 없이 정상 응답코드로 내려올 수 있으므로, 응답의 단축종목코드(shrn_iscd)가 채워져 있는지 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_orderbook_after",
+   "name": "시간외 단일가 호가 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/orderbook/after",
+   "tr_id": "ohhts_1181_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 호가를 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 시간외 단일가 호가는 \"J\" 로 조회하십시오. \"NJ\"·\"TJ\" 로 조회하면 오류 없이 시간외단일가 총잔량이 모두 0 인 응답이 정상 응답코드로 내려옵니다. 소문자 \"j\" 로 조회해도 같으며, 이때는 단축종목코드(shrn_iscd)도 빈 값입니다. 0 이 내려오면 시장 구분 값부터 확인하십시오."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930)로 넣으십시오. 등록되지 않은 종목코드는 오류 없이 정상 응답코드로 내려올 수 있으므로, 응답의 단축종목코드(shrn_iscd)가 채워져 있는지 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_trades_minutes",
+   "name": "체결추이 조회(분)",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/trades/minutes",
+   "tr_id": "ohhts_1002_002r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 체결을 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 같은 종목이라도 시장마다 누적거래량이 다릅니다."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930)로 넣으십시오. 등록되지 않은 종목코드는 오류 없이 빈 목록이 정상 응답코드로 내려오며 자료가 없는 경우와 구분되지 않으므로, 빈 목록을 받으면 종목코드부터 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "market_trades_ticks",
+   "name": "체결추이 조회(틱)",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/trades/ticks",
+   "tr_id": "ohhts_1002_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "어느 시장의 체결을 볼지 정합니다. \"J\": KRX \"NJ\": 대체거래소(NXT) \"TJ\": KRX + NXT 통합 같은 종목이라도 시장마다 누적거래량이 다릅니다."
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "종목 코드입니다. 6자리(005930)로 넣으십시오. 등록되지 않은 종목코드는 오류 없이 빈 목록이 정상 응답코드로 내려오며 자료가 없는 경우와 구분되지 않으므로, 빈 목록을 받으면 종목코드부터 확인하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ref_market_days",
+   "name": "국내 영업일 조회",
+   "category": "reference",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/reference/v1/market-days",
+   "tr_id": "obcpp_bsdy_021r",
+   "state_changing": false,
+   "params": []
+  },
+  {
+   "api_type": "ref_market_hours",
+   "name": "국내 장운영 조회",
+   "category": "reference",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/reference/v1/market-hours",
+   "tr_id": "obtrs_sstm_506r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mkpl_cls_code",
+     "name_ko": "매매시장구분코드",
+     "required": true,
+     "description": "조회할 매매시장 코드입니다. 두 자리로 넣으십시오. \"01\" 유가증권 · \"02\" 코넥스 · \"03\" 코스닥 · \"24\" 소액채권 (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "market_index_candles_days",
+   "name": "국내지수 시세추이 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/index/candles/days",
+   "tr_id": "ohhts_1514_101r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 지수의 코드입니다. (예: 코스피 KGG01P)"
+    },
+    {
+     "name": "period_cls_code",
+     "name_ko": "조회주기구분코드",
+     "required": true,
+     "description": "일봉·주봉·월봉·연봉 중 무엇을 조회할지 정합니다. 일봉 D · 주봉 W · 월봉 M · 연봉 Y 를 넣습니다."
+    }
+   ]
+  },
+  {
+   "api_type": "market_index_candles_minutes",
+   "name": "국내지수 시세추이 조회 (분봉)",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/index/candles/minutes",
+   "tr_id": "ohhts_8001_002r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 지수의 코드입니다. (예: 코스피 KGG01P)"
+    },
+    {
+     "name": "hour_cls_code",
+     "name_ko": "봉 간격(초)",
+     "required": true,
+     "description": "봉 간격을 초 단위로 입력합니다. 60은 1분봉, 300은 5분봉입니다. 반드시 넣으셔야 합니다."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": false,
+     "description": "조회 시작일자입니다. YYYYMMDD 8자리이며 to 와 함께 넣어 기간을 지정합니다. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자입니다. YYYYMMDD 8자리. from과 함께 사용합니다. (query string)"
+    },
+    {
+     "name": "past_data_incu_yn",
+     "name_ko": "과거데이터포함여부",
+     "required": false,
+     "description": "과거 데이터 포함 여부입니다. \"Y\" 또는 \"N\" 을 넣습니다."
+    }
+   ]
+  },
+  {
+   "api_type": "market_index_prices",
+   "name": "국내지수 현재가 조회",
+   "category": "domestic_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/index/prices",
+   "tr_id": "ohhts_1514_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 지수의 코드입니다. (예: 코스피 KGG01P)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_buy",
+   "name": "해외주식 매수 주문",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/orders/buy",
+   "tr_id": "obtro_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "ovrs_stck_symb_iscd",
+     "name_ko": "해외주식심볼종목코드",
+     "required": true,
+     "description": "해외주식 심볼입니다. (예: \"AAPL\")"
+    },
+    {
+     "name": "ovrs_exch_vndr_idno",
+     "name_ko": "해외거래소벤더식별번호",
+     "required": true,
+     "description": "종목이 상장된 거래소 코드입니다. \"0321\": 뉴욕(NYSE) \"0537\": 나스닥(NASDAQ) \"0066\": 아멕스(AMEX) \"0104\": 홍콩 \"0215\": 상해 \"0106\": 도쿄 전체 목록은 해외 거래소 조회(/reference/v1/overseas/exchanges)로 확인하십시오."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 지정가 \"05\": 시장가 \"31\": LOO (장 개시 지정가) \"32\": LOC (장 마감 지정가) \"33\": MOO (장 개시 시장가) \"34\": MOC (장 마감 시장가) \"35\": Limit VWAP \"36\": Limit TWAP \"37\": VWAP \"38\": TWAP"
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건입니다. \"0\": 조건 없음 \"2\": 개장 전 \"7\": 종가 oder_cls_code 가 01 지정가, 05시장가의 경우 0 31 LOO, 33 MOO의 경우 2 32 LOC, 34 MOC의 경우 7 35, 36, 37, 38 (VWAP/TWAP계열)은 0"
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "ovrs_stck_oder_prc",
+     "name_ko": "주문가격",
+     "required": true,
+     "description": "주문 단가입니다(현지 통화). 소수점 이하 4자리까지 입력할 수 있으며, 초과하면 IGW50002 오류로 거절됩니다. 지정가 계열(oder_cls_code \"01\" \"31\" \"32\" \"35\" \"36\")은 단가를, 시장가 계열(\"05\" \"33\" \"34\" \"37\" \"38\")은 0을 넣습니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 평소에는 넣지 않아도 됩니다. 응답의 warn_cls_code 가 \"1\"(경고) 또는 \"3\"(미국 PTP 종목 과세 확인)이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 값을 \"Y\"로 넣어 재전송합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_sell",
+   "name": "해외주식 매도 주문",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/orders/sell",
+   "tr_id": "obtro_oder_101a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "ovrs_stck_symb_iscd",
+     "name_ko": "해외주식심볼종목코드",
+     "required": true,
+     "description": "해외주식 심볼입니다. (예: \"AAPL\")"
+    },
+    {
+     "name": "ovrs_exch_vndr_idno",
+     "name_ko": "해외거래소벤더식별번호",
+     "required": true,
+     "description": "종목이 상장된 거래소 코드입니다. 미국 ― \"0321\": 뉴욕(NYSE), \"0537\": 나스닥(NASDAQ), \"0066\": 아멕스(AMEX) 중화권 ― \"0104\": 홍콩, \"0215\": 상해, \"0214\": 심천 일본 ― \"0106\": 도쿄, \"0107\": 오사카, \"0112\": 자스닥 베트남 ― \"0770\": 호치민, \"0771\": 하노이 전체 목록은 해외 거래소 조회(/reference/v1/overseas/exchanges)로 확인하십시오."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 지정가 \"05\": 시장가 \"31\": LOO (장 개시 지정가) \"32\": LOC (장 마감 지정가) \"33\": MOO (장 개시 시장가) \"34\": MOC (장 마감 시장가) \"35\": Limit VWAP \"36\": Limit TWAP \"37\": VWAP \"38\": TWAP 지정가 계열(\"01\" \"31\" \"32\" \"35\" \"36\")은 ovrs_stck_oder_prc 에 단가를 넣고, 시장가 계열(\"05\" \"33\" \"34\" \"37\" \"38\")은 0을 넣습니다."
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건입니다. \"0\": 조건 없음 \"2\": 개장 전 \"7\": 종가 지정가·시장가 주문은 넣지 않으셔도 됩니다. oder_cls_code 가 01 지정가, 05시장가의 경우 0 31 LOO, 33 MOO의 경우 2 32 LOC, 34 MOC의 경우 7 35, 36, 37, 38 (VWAP/TWAP계열)은 0"
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "ovrs_stck_oder_prc",
+     "name_ko": "주문가격",
+     "required": true,
+     "description": "주문 단가입니다(현지 통화). 소수점 이하 4자리까지 입력할 수 있으며, 초과하면 IGW50002 오류로 거절됩니다. 지정가 계열(oder_cls_code \"01\" \"31\" \"32\" \"35\" \"36\")은 단가를, 시장가 계열(\"05\" \"33\" \"34\" \"37\" \"38\")은 0을 넣습니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 평소에는 넣지 않으셔도 됩니다. 응답의 warn_cls_code 가 \"1\"(경고) 또는 \"3\"(미국 PTP 종목 과세 확인)이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 값을 \"Y\" 로 넣어 다시 보내십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_modify",
+   "name": "해외주식 주문 정정",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/orders/modify",
+   "tr_id": "obtro_oder_102a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "oder_date",
+     "name_ko": "주문일자",
+     "required": true,
+     "description": "정정할 주문의 주문일자를 YYYYMMDD 형식으로 넣습니다."
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": true,
+     "description": "정정할 주문의 번호를 넣습니다. 주문 접수 응답 또는 주문체결내역 조회의 oder_no 입니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "주문 구분 코드 \"01\": 지정가 \"05\": 시장가 \"31\": LOO (장 개시 지정가) \"32\": LOC (장 마감 지정가) \"33\": MOO (장 개시 시장가) \"34\": MOC (장 마감 시장가) \"35\": Limit VWAP \"36\": Limit TWAP \"37\": VWAP \"38\": TWAP 지정가 계열(\"01\" \"31\" \"32\" \"35\" \"36\")은 ovrs_stck_oder_prc 에 단가를 넣고, 시장가 계열(\"05\" \"33\" \"34\" \"37\" \"38\")은 0을 넣습니다."
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "ovrs_stck_oder_prc",
+     "name_ko": "주문가격",
+     "required": true,
+     "description": "정정 후 단가입니다(현지 통화). 소수점 이하 4자리까지 입력할 수 있으며, 초과하면 IGW50002 오류로 거절됩니다. 지정가 계열(oder_cls_code \"01\" \"31\" \"32\" \"35\" \"36\")은 단가를, 시장가 계열(\"05\" \"33\" \"34\" \"37\" \"38\")은 0을 넣습니다."
+    },
+    {
+     "name": "oder_cond_cls_code",
+     "name_ko": "주문조건구분코드",
+     "required": true,
+     "description": "주문 조건입니다. \"0\": 조건 없음 \"2\": 개장 전 \"7\": 종가 지정가·시장가 주문은 넣지 않으셔도 됩니다. oder_cls_code 가 01 지정가, 05시장가의 경우 0 31 LOO, 33 MOO의 경우 2 32 LOC, 34 MOC의 경우 7 35, 36, 37, 38 (VWAP/TWAP계열)은 0"
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 평소에는 넣지 않으셔도 됩니다. 응답의 warn_cls_code 가 \"1\"(경고) 또는 \"3\"(미국 PTP 종목 과세 확인)이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 값을 \"Y\" 로 넣어 다시 보내십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_cancel",
+   "name": "해외주식 주문 취소",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/orders/cancel",
+   "tr_id": "obtro_oder_102a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "oder_date",
+     "name_ko": "주문일자",
+     "required": true,
+     "description": "취소할 주문의 주문일자를 YYYYMMDD 형식으로 넣습니다."
+    },
+    {
+     "name": "orgl_oder_no",
+     "name_ko": "원주문번호",
+     "required": true,
+     "description": "취소할 주문의 번호를 넣습니다. 주문 접수 응답 또는 주문체결내역 조회의 oder_no 입니다."
+    },
+    {
+     "name": "oder_cls_code",
+     "name_ko": "주문구분코드",
+     "required": true,
+     "description": "원주문의 주문 구분 코드를 그대로 넣습니다. \"01\": 지정가 \"05\": 시장가 \"31\": LOO \"32\": LOC \"33\": MOO \"34\": MOC \"35\": Limit VWAP \"36\": Limit TWAP \"37\": VWAP \"38\": TWAP"
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "경고 확인 여부 \"N\": 미확인 \"Y\": 확인 평소에는 넣지 않으셔도 됩니다. 응답의 warn_cls_code 가 \"1\"(경고) 또는 \"3\"(미국 PTP 종목 과세 확인)이면 warn_msg 내용을 확인한 뒤 같은 요청에 이 값을 \"Y\"로 넣어 재전송합니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_estimate",
+   "name": "해외주식 주문가능금액 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/overseas/orders/estimate",
+   "tr_id": "obtro_acnt_151r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "intg_marg_iqry_yn",
+     "name_ko": "통합증거금조회여부",
+     "required": false,
+     "description": "통합증거금 기준으로 조회할지 지정합니다. \"Y\": 통합증거금 기준 \"N\": 일반 기준 (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_today",
+   "name": "해외주식 당일 주문체결내역 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/overseas/orders/today",
+   "tr_id": "obtro_oder_103r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "cntg_cls_code",
+     "name_ko": "체결구분코드",
+     "required": false,
+     "description": "체결 여부 구분입니다. \"0\": 전체 \"1\": 체결 \"2\": 미체결"
+    },
+    {
+     "name": "seln_byov_clcd",
+     "name_ko": "매도매수구분코드",
+     "required": false,
+     "description": "매도·매수 구분입니다. \"0\": 전체 \"1\": 매도 \"2\": 매수"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_reserved_orders_buy",
+   "name": "해외주식 예약주문 매수",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/reserved-orders/buy",
+   "tr_id": "obtro_oder_112a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "ovrs_stck_symb_iscd",
+     "name_ko": "해외주식심볼종목코드",
+     "required": true,
+     "description": "해외주식 심볼입니다. (예: AAPL)"
+    },
+    {
+     "name": "ovrs_exch_vndr_idno",
+     "name_ko": "해외거래소벤더식별번호",
+     "required": true,
+     "description": "거래소 벤더 코드입니다. 해외 거래소 조회의 ovrs_exch_vndr_idno 를 넣으십시오. (예: 나스닥 0537)"
+    },
+    {
+     "name": "rsev_aspr_tpcd",
+     "name_ko": "예약호가유형코드",
+     "required": true,
+     "description": "예약 주문의 호가 유형입니다. \"1\": 지정가 \"2\": 시장가 \"4\": LOO(장개시 지정가) \"5\": LOC(장마감 지정가) \"6\": MOO(장개시 시장가) \"7\": MOC(장마감 시장가) \"8\": Limit VWAP \"9\": Limit TWAP \"A\": VWAP \"B\": TWAP"
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "ovrs_stck_oder_prc",
+     "name_ko": "주문가격",
+     "required": true,
+     "description": "주문 단가입니다(현지 통화). 소수점 이하 4자리까지 입력할 수 있으며, 초과하면 IGW50002 오류로 거절됩니다."
+    },
+    {
+     "name": "oder_aspr_rate",
+     "name_ko": "주문호가비율",
+     "required": false,
+     "description": "주문 호가 비율입니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "착오매매 경고를 확인했는지 여부입니다. \"N\": 미확인 \"Y\": 확인 처음에는 \"N\" 으로 보내거나 넣지 않습니다."
+    },
+    {
+     "name": "oder_rsev_cls_code",
+     "name_ko": "주문예약구분코드",
+     "required": true,
+     "description": "예약 방식입니다. \"1\": 일반예약 \"2\": 기간잔량 \"3\": 기간예약 \"4\": 특정일주문"
+    },
+    {
+     "name": "oder_rsev_hour_clcd",
+     "name_ko": "주문예약시간구분코드",
+     "required": false,
+     "description": "예약 주문을 언제 발주할지 정하는 시간 구분입니다. \"0\": 장개시 \"1\": 장마감 10분 전 \"2\": 장마감 30분 전 \"3\": 장개시 30분 후"
+    },
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": true,
+     "description": "주문이 나가기 시작하는 일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": true,
+     "description": "주문이 나가는 마지막 일자입니다. YYYYMMDD 8자리."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_reserved_orders_sell",
+   "name": "해외주식 예약주문 매도",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/reserved-orders/sell",
+   "tr_id": "obtro_oder_112a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "ovrs_stck_symb_iscd",
+     "name_ko": "해외주식심볼종목코드",
+     "required": true,
+     "description": "해외주식 심볼입니다. (예: AAPL)"
+    },
+    {
+     "name": "ovrs_exch_vndr_idno",
+     "name_ko": "해외거래소벤더식별번호",
+     "required": true,
+     "description": "거래소 벤더 코드입니다. 해외 거래소 조회의 ovrs_exch_vndr_idno 를 넣으십시오. (예: 나스닥 0537)"
+    },
+    {
+     "name": "rsev_aspr_tpcd",
+     "name_ko": "예약호가유형코드",
+     "required": true,
+     "description": "예약 주문의 호가 유형입니다. \"1\": 지정가 \"2\": 시장가 \"4\": LOO(장개시 지정가) \"5\": LOC(장마감 지정가) \"6\": MOO(장개시 시장가) \"7\": MOC(장마감 시장가) \"8\": Limit VWAP \"9\": Limit TWAP \"A\": VWAP \"B\": TWAP"
+    },
+    {
+     "name": "odqt",
+     "name_ko": "주문수량",
+     "required": true,
+     "description": "주문 수량입니다."
+    },
+    {
+     "name": "ovrs_stck_oder_prc",
+     "name_ko": "주문가격",
+     "required": true,
+     "description": "주문 단가입니다(현지 통화). 소수점 이하 4자리까지 입력할 수 있으며, 초과하면 IGW50002 오류로 거절됩니다."
+    },
+    {
+     "name": "oder_aspr_rate",
+     "name_ko": "주문호가비율",
+     "required": false,
+     "description": "주문 호가 비율입니다."
+    },
+    {
+     "name": "warn_cnfr_yn",
+     "name_ko": "경고확인여부",
+     "required": false,
+     "description": "착오매매 경고를 확인했는지 여부입니다. \"N\": 미확인 \"Y\": 확인 처음에는 \"N\" 으로 보내거나 넣지 않습니다."
+    },
+    {
+     "name": "oder_rsev_cls_code",
+     "name_ko": "주문예약구분코드",
+     "required": true,
+     "description": "예약 방식입니다. \"1\": 일반예약 \"2\": 기간잔량 \"3\": 기간예약 \"4\": 특정일주문"
+    },
+    {
+     "name": "oder_rsev_hour_clcd",
+     "name_ko": "주문예약시간구분코드",
+     "required": false,
+     "description": "예약 주문을 언제 발주할지 정하는 시간 구분입니다. \"0\": 장개시 \"1\": 장마감 10분 전 \"2\": 장마감 30분 전 \"3\": 장개시 30분 후"
+    },
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": true,
+     "description": "주문이 나가기 시작하는 일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": true,
+     "description": "주문이 나가는 마지막 일자입니다. YYYYMMDD 8자리."
+    },
+    {
+     "name": "loan_oder_cls_code",
+     "name_ko": "대출주문구분코드",
+     "required": false,
+     "description": "대출 재원 구분입니다. \"03\": 예탁담보"
+    },
+    {
+     "name": "svc_cls_code",
+     "name_ko": "서비스구분코드",
+     "required": false,
+     "description": "서비스 구분입니다. \"203\": 담보 상환 매도"
+    },
+    {
+     "name": "loan_date",
+     "name_ko": "대출일자",
+     "required": false,
+     "description": "대출 일자입니다."
+    },
+    {
+     "name": "loan_srno",
+     "name_ko": "대출일련번호",
+     "required": false,
+     "description": "대출 일련번호입니다."
+    },
+    {
+     "name": "whol_amt_rdmp_yn",
+     "name_ko": "UI전체금액상환여부",
+     "required": false,
+     "description": "전체 금액을 상환할지 여부입니다. \"Y\" 또는 \"N\"."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_reserved_orders_cancel",
+   "name": "해외주식 예약주문 취소",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/trading/v1/overseas/reserved-orders/cancel",
+   "tr_id": "obtro_oder_113a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "oder_rsev_mst_date",
+     "name_ko": "주문예약마스터일자",
+     "required": true,
+     "description": "예약 일자입니다. 취소하실 때 이 값을 넣으십시오."
+    },
+    {
+     "name": "oder_rsev_mst_no",
+     "name_ko": "주문예약마스터번호",
+     "required": true,
+     "description": "예약 번호입니다. 취소하실 때 이 값을 넣으십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_reserved_orders",
+   "name": "해외주식 예약주문 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/overseas/reserved-orders",
+   "tr_id": "obtro_oder_114r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iqry_sta_date",
+     "name_ko": "조회시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리로 입력합니다. 조회종료일자·매도매수구분코드와 함께 필수입니다. (query string)"
+    },
+    {
+     "name": "iqry_fin_date",
+     "name_ko": "조회종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리로 입력합니다. 조회시작일자·매도매수구분코드와 함께 필수입니다. (query string)"
+    },
+    {
+     "name": "seln_byov_clcd",
+     "name_ko": "매도매수구분코드",
+     "required": true,
+     "description": "매도·매수 구분입니다. \"0\": 전체 \"1\": 매도 \"2\": 매수"
+    },
+    {
+     "name": "iqry_cls_code",
+     "name_ko": "조회구분코드",
+     "required": false,
+     "description": "조회 구분입니다. \"1\": 주문일 \"2\": 예약일"
+    },
+    {
+     "name": "iqry_idnt_clcd",
+     "name_ko": "조회식별구분코드",
+     "required": false,
+     "description": "조회 대상 구분입니다. \"0\": 전체 \"1\": 전체(취소분 제외) \"2\": 예약 상태인 건만 (query string)"
+    },
+    {
+     "name": "oder_rsev_cls_code",
+     "name_ko": "주문예약구분코드",
+     "required": false,
+     "description": "예약 방식입니다. \"0\": 전체 \"1\": 일반예약 \"2\": 기간잔량 \"3\": 기간예약 \"4\": 특정일주문"
+    },
+    {
+     "name": "tday_deal_yn",
+     "name_ko": "당일매매여부",
+     "required": false,
+     "description": "당일 매매분만 볼지 여부입니다. \"Y\" 또는 \"N\". (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 값 오른쪽에 공백이 붙어 내려오는 경우가 있습니다. 잘라내지 말고 URL 인코딩하여 원본 그대로 보내십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_candles_minutes",
+   "name": "해외주식 시세추이 조회 (분봉)",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/candles/minutes",
+   "tr_id": "ohhts_eapi_005r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 (query string)"
+    },
+    {
+     "name": "hour_cls_code",
+     "name_ko": "봉 간격",
+     "required": true,
+     "description": "봉 간격을 초 단위로 입력합니다. 60은 1분, 300은 5분입니다. 반드시 넣으셔야 합니다. 빠뜨리면 오류가 반환됩니다. 숫자가 아닌 값은 오류 없이 60(1분)으로 조회됩니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_candles_days",
+   "name": "해외주식 시세추이 조회 (일봉)",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/candles/days",
+   "tr_id": "ohhts_6001_003r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 (query string)"
+    },
+    {
+     "name": "mod_stpr_cls_code",
+     "name_ko": "수정주가구분코드",
+     "required": true,
+     "description": "수정주가 적용 구분입니다. \"0\": 분할을 반영해 보정한 주가 \"1\": 보정 전 원래 주가 반드시 넣으셔야 합니다. 빠뜨리면 오류가 반환됩니다. (query string)"
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": false,
+     "description": "조회 시작일자입니다. YYYYMMDD 8자리. to와 함께 넣으면 그 기간의 일봉을 모두 반환합니다. 미입력 시 최신 40건을 반환합니다. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자입니다. YYYYMMDD 8자리 from과 함께 사용합니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_trades_ticks",
+   "name": "해외주식 체결추이 (틱)",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/trades/ticks",
+   "tr_id": "ohhts_eapi_006r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "연속조회 여부입니다. 이 API 는 응답에 tr_cont·tr_cont_key 가 내려오지 않습니다. 1 을 넣으면 오류 없이 data 가 빈 배열로 내려오므로 처음 조회에서는 넣지 않으셔도 됩니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "연속조회 키입니다. 이 API 는 응답에 연속조회 키가 내려오지 않으므로 넣지 않으셔도 됩니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_trades_minutes",
+   "name": "해외주식 체결추이 조회 (분)",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/trades/minutes",
+   "tr_id": "ohhts_eapi_005r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 지연(\"1\")으로 조회하면 이전 시각의 행이 섞여 내려올 수 있으니 체결시간(korea_hour)을 확인하십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_history",
+   "name": "해외주식 주문체결내역 조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/overseas/orders/history",
+   "tr_id": "obtro_oder_201r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리로 입력합니다. 시작일자에 \"00000000\" 을 넣고 종료일자를 뒤의 날짜(예: \"20991231\")로 두면 전체 이력이 내려옵니다. 시작일자가 종료일자보다 크면 rsp_cd \"3174\" 오류입니다. (query string)"
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리로 입력합니다. \"00000000\" 은 넣지 마십시오. 시작일자보다 작아 rsp_cd \"3174\" 오류가 납니다. 기간 끝을 열어 두려면 충분히 뒤의 날짜(예: \"20991231\")를 넣으십시오. (query string)"
+    },
+    {
+     "name": "seln_byov_clcd",
+     "name_ko": "매도매수구분코드",
+     "required": false,
+     "description": "매도·매수 구분입니다. \"0\": 전체 \"1\": 매도 \"2\": 매수 값대로 걸러집니다. \"1\" 은 매도만 내려옵니다. 항목을 빼시면 전체가 조회됩니다. 목록에 없는 한 자리 값은 전체 조회가 아니라 0건(rsp_cd \"5820\")이 내려옵니다. 자료가 없는 것과 값이 잘못된 것이 같은 응답이므로 보내시기 전에 세 값 가운데 하나인지 확인하십시오. (query string)"
+    },
+    {
+     "name": "cntg_cls_code",
+     "name_ko": "체결구분코드",
+     "required": true,
+     "description": "체결 여부로 걸러냅니다. \"0\": 전체 \"1\": 체결 \"2\": 미체결 필수 항목입니다. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청하실 때 \"1\" 을 넣습니다. 첫 조회에는 넣지 않습니다. tr_cont_key 와 함께 쿼리 스트링으로 보내십시오."
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 쿼리 스트링으로 보내십시오. 직전 응답의 값을 고치지 말고 그대로 보내십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_orders_detail",
+   "name": "해외주식 주문체결  상세조회",
+   "category": "trading",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/trading/v1/overseas/orders/detail",
+   "tr_id": "obtro_oder_271r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문일자",
+     "required": true,
+     "description": "조회할 주문의 주문일자를 YYYYMMDD 8자리로 입력합니다. 주문체결내역 조회(/trading/v1/overseas/orders/history) 응답의 oder_date 와 같은 값입니다. (query string)"
+    },
+    {
+     "name": "oder_no",
+     "name_ko": "주문번호",
+     "required": true,
+     "description": "조회할 주문 번호입니다. 주문 접수 응답의 oder_no 또는 주문체결내역 조회 응답의 oder_no 를 그대로 넣으십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_holdings",
+   "name": "해외주식 잔고 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/overseas/holdings",
+   "tr_id": "obtro_oder_110r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 정확히 \"1\" 을 넣습니다. 첫 조회에는 넣지 않습니다. 연속조회 키(tr_cont_key)와 반드시 함께 보내십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 한 글자도 바꾸지 말고 그대로 URL 인코딩하여 넣습니다. 첫 조회에는 넣지 않습니다. tr_cont 에 \"1\" 을 함께 보내십시오. 키를 바꾸면 오류 없이 첫 페이지가 다시 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_currencies",
+   "name": "해외주식 외화잔고 조회",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/overseas/currencies",
+   "tr_id": "obtro_oder_266r",
+   "state_changing": false,
+   "params": []
+  },
+  {
+   "api_type": "ovs_profit_loss",
+   "name": "해외주식 실현손익",
+   "category": "account",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/accounts/v1/me/overseas/profit-loss",
+   "tr_id": "obtro_oder_262r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "oder_sta_date",
+     "name_ko": "주문시작일자",
+     "required": true,
+     "description": "주문 시작일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 시작일을 종료일보다 뒤로 넣으시면 응답코드 \"3174\" 로 거부됩니다. (query string)"
+    },
+    {
+     "name": "oder_fin_date",
+     "name_ko": "주문종료일자",
+     "required": true,
+     "description": "주문 종료일자를 YYYYMMDD 형식 여덟 자리로 입력합니다. 반드시 넣으셔야 합니다. 시작일자(oder_sta_date)보다 앞선 날짜를 넣으시면 응답코드 \"3174\" 로 거부됩니다. (query string)"
+    },
+    {
+     "name": "ovrs_stck_exch_idno",
+     "name_ko": "해외주식거래소식별번호",
+     "required": false,
+     "description": "거래소 코드입니다. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": false,
+     "description": "종목 코드입니다. (query string)"
+    },
+    {
+     "name": "loan_yn",
+     "name_ko": "대출여부",
+     "required": false,
+     "description": "대출 거래만 볼지 여부입니다. \"Y\" 또는 \"N\". (query string)"
+    },
+    {
+     "name": "ctcd",
+     "name_ko": "국가코드",
+     "required": true,
+     "description": "국가 코드(필수)입니다. 등록되지 않은 값(예: \"99\")도 오류 없이 0건이 내려옵니다. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. 연속조회 키(tr_cont_key)와 함께 보내십시오. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 값 오른쪽에 공백이 붙어 내려오는 경우가 있습니다. 잘라내지 말고 URL 인코딩하여 원본 그대로 보내십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_orderbook",
+   "name": "해외주식 호가 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/orderbook",
+   "tr_id": "ohhts_6000_002r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 지연(\"1\")으로 조회하면 미국 종목(AAPL)의 호가·잔량이 모두 0 으로 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ref_ovs_exchanges",
+   "name": "해외 거래소 조회",
+   "category": "reference",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/reference/v1/overseas/exchanges",
+   "tr_id": "obtro_comn_306r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "ovrs_stck_mrkt_tr_cls_code",
+     "name_ko": "해외주식시장거래구분코드",
+     "required": false,
+     "description": "시장 구분 코드(2자리)이며, 이 값으로 거래소 목록을 걸러냅니다. 반드시 두 자리로 넣으십시오. 넣지 않으면 한 번에 30건씩 내려오며, 응답의 tr_cont 가 \"1\" 인 동안 tr_cont_key 로 이어서 받으십시오. (query string)"
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\" 을 넣습니다. 첫 조회에는 넣지 않습니다. 직전 응답의 tr_cont_key 와 함께 쿼리 스트링으로 보내십시오. 응답의 tr_cont 가 \"1\" 이면 다음 페이지가 남아 있습니다."
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 쿼리 스트링으로 보내십시오. 값 오른쪽에 공백이 붙어 내려오므로 잘라내지 말고 URL 인코딩하여 받은 그대로 보내십시오. 같은 API 의 직전 응답에서 받은 키만 넣으십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "ref_ovs_market_hours",
+   "name": "해외 장운영 조회",
+   "category": "reference",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/reference/v1/overseas/market-hours",
+   "tr_id": "obtro_comn_010r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "ovrs_stck_mrkt_tr_cls_code",
+     "name_ko": "해외주식시장거래구분코드",
+     "required": false,
+     "description": "시장 거래 구분 코드(2자리)입니다. 두 자리로 넣으십시오. 범위 밖의 두 자리 값(예: \"33\")을 넣으면 HTTP 500 과 함께 data 가 없는 본문이 내려오며, 이때 rsp_cd 는 \"0000\" 입니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ref_ovs_market_days",
+   "name": "해외 영업일 조회",
+   "category": "reference",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/reference/v1/overseas/market-days",
+   "tr_id": "obtro_comn_006r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "ovrs_exch_vndr_idno",
+     "name_ko": "해외거래소벤더식별번호",
+     "required": true,
+     "description": "해외 거래소 조회(/reference/v1/overseas/exchanges)의 ovrs_exch_vndr_idno 를 넣습니다. (예: 나스닥 \"0537\") 예를 들어 \"0000\" 을 넣으면 rsp_cd \"5806\" 오류가 납니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "fx_exchanges",
+   "name": "실시간 환전신청",
+   "category": "forex",
+   "protocol": "REST",
+   "method": "POST",
+   "path": "/forex/v1/exchanges",
+   "tr_id": "obtsd_fbnk_202a",
+   "state_changing": true,
+   "params": [
+    {
+     "name": "mnec_clcd",
+     "name_ko": "환전구분코드",
+     "required": true,
+     "description": "환전 방향입니다. \"1\": 외화 매수(원화 → 외화) \"2\": 외화 매도(외화 → 원화)"
+    },
+    {
+     "name": "wncr_amt",
+     "name_ko": "원화금액",
+     "required": true,
+     "description": "환전할 원화 금액입니다. 원 단위 정수입니다."
+    },
+    {
+     "name": "frcr_amt",
+     "name_ko": "외화금액",
+     "required": true,
+     "description": "환전할 외화 금액입니다."
+    },
+    {
+     "name": "exrt_stnd_time",
+     "name_ko": "환율기준시각",
+     "required": true,
+     "description": "환전 적용환율 조회(/forex/v1/rates/applied) 응답의 exrt_stnd_time 을 그대로 넣습니다. 환전 응답의 exrt_stnd_time 은 요청값과 다를 수 있습니다."
+    },
+    {
+     "name": "iqry_exrt",
+     "name_ko": "조회환율",
+     "required": true,
+     "description": "환전 적용환율 조회에서 받은 적용환율을 그대로 넣습니다. 외화 매수(mnec_clcd \"1\")는 tltr_aply_byrt 외화 매도(mnec_clcd \"2\")는 tltr_aply_slrt"
+    },
+    {
+     "name": "crcd",
+     "name_ko": "통화코드",
+     "required": true,
+     "description": "통화 코드입니다. (예: \"USD\")"
+    }
+   ]
+  },
+  {
+   "api_type": "fx_exchanges_history",
+   "name": "환전 내역 조회",
+   "category": "forex",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/forex/v1/exchanges/history",
+   "tr_id": "obtsd_fbnk_203r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iqry_sta_date",
+     "name_ko": "조회시작일자",
+     "required": true,
+     "description": "조회 시작일자를 YYYYMMDD 8자리로 입력합니다. 기간 앞을 열어 두려면 \"00000000\" 을 넣습니다. 시작일자가 종료일자보다 늦으면 오류 없이 \"5820\" 과 0건이 내려옵니다. 달력에 없는 날짜(\"20260231\")도 오류 없이 조회되므로 날짜 형식을 직접 확인하십시오."
+    },
+    {
+     "name": "iqry_fin_date",
+     "name_ko": "조회종료일자",
+     "required": true,
+     "description": "조회 종료일자를 YYYYMMDD 8자리로 입력합니다. 미래 일자를 넣어도 오류 없이 그 일자까지의 내역이 조회됩니다."
+    },
+    {
+     "name": "tr_cont",
+     "name_ko": "연속조회 여부",
+     "required": false,
+     "description": "다음 페이지를 요청할 때 \"1\"을 넣습니다. 첫 조회에는 넣지 않습니다. 연속조회 키(tr_cont_key)와 함께 보냅니다. (query string)"
+    },
+    {
+     "name": "tr_cont_key",
+     "name_ko": "연속조회 키",
+     "required": false,
+     "description": "직전 응답의 tr_cont_key 를 그대로 넣습니다. 첫 조회에는 넣지 않습니다. 값 오른쪽에 공백이 붙어 내려오는 경우가 있습니다. 잘라내지 말고 URL 인코딩하여 원본 그대로 보내십시오. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "fx_rates_applied",
+   "name": "환전 적용환율 조회",
+   "category": "forex",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/forex/v1/rates/applied",
+   "tr_id": "obtsd_fbnk_201r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "crcd",
+     "name_ko": "통화코드",
+     "required": true,
+     "description": "통화 코드입니다. (예: \"USD\") 세 자리로 넣으십시오."
+    },
+    {
+     "name": "mnec_clcd",
+     "name_ko": "환전구분코드",
+     "required": true,
+     "description": "환전 방향입니다. \"1\": 외화 매수(원화 → 외화) \"2\": 외화 매도(외화 → 원화) 그 밖의 값(예: \"3\")은 \"필수 입력 항목이 누락되었습니다\"(7668)로 응답하고 rsp_sub_msg 에 \"환전 매수/매도구분\" 이 담깁니다. 이 조회는 매수·매도 환율을 둘 다 내려주므로 매수는 tltr_aply_byrt, 매도는 tltr_aply_slrt 를 사용하십시오."
+    }
+   ]
+  },
+  {
+   "api_type": "fx_rates",
+   "name": "고시환율 조회",
+   "category": "forex",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/forex/v1/rates",
+   "tr_id": "obtsd_fbnk_228r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "stnd_date",
+     "name_ko": "기준일자",
+     "required": true,
+     "description": "기준일자를 YYYYMMDD 8자리로 입력합니다. 반드시 넣으십시오. 과거 일자도 조회할 수 있습니다. 토요일·공휴일에도 고시분이 내려오는 일자가 있으므로 요일로 짐작하지 말고 응답 목록의 길이로 확인하십시오. (query string)"
+    },
+    {
+     "name": "crcd",
+     "name_ko": "통화코드",
+     "required": false,
+     "description": "조회할 통화 코드입니다. 대문자 세 자리로 넣으며(예: \"USD\"), 넣지 않으면 고시 중인 전 통화가 내려옵니다. 소문자로 넣으면 오류 없이 \"5820\" 과 0건이 내려옵니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_index_candles_days",
+   "name": "해외지수 시세추이 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/index/candles/days",
+   "tr_id": "ohhts_8001_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 해외 지수의 코드입니다. (예: 나스닥 종합 NAS@IXIC, 니케이 225 NII@NI225, 상해종합 SHS@000001)"
+    },
+    {
+     "name": "period_cls_code",
+     "name_ko": "조회주기구분코드",
+     "required": true,
+     "description": "일봉·주봉·월봉·연봉 중 무엇을 조회할지 정합니다. 일봉 D · 주봉 W · 월봉 M · 연봉 Y 를 넣습니다."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": false,
+     "description": "조회 시작일자입니다. YYYYMMDD 8자리. to 와 함께 넣으면 그 기간의 봉을 모두 반환합니다. from 만 넣으면 그 일자부터 과거 100건, 둘 다 넣지 않으면 최근 100건이 내려옵니다."
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자입니다. YYYYMMDD 8자리. from과 함께 사용합니다. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_index_candles_minutes",
+   "name": "해외지수 시세추이 조회(분봉)",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/index/candles/minutes",
+   "tr_id": "ohhts_8001_002r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 해외 지수의 코드입니다. (예: 나스닥 종합 NAS@IXIC)"
+    },
+    {
+     "name": "hour_cls_code",
+     "name_ko": "봉 간격(초)",
+     "required": true,
+     "description": "봉 간격을 초 단위로 입력합니다. 60은 1분봉, 300은 5분봉입니다. 반드시 넣으셔야 합니다. 빠뜨리면 오류가 반환됩니다."
+    },
+    {
+     "name": "from",
+     "name_ko": "조회 시작일자",
+     "required": false,
+     "description": "조회 시작일자입니다. YYYYMMDD 8자리. to와 함께 넣으면 그 기간의 봉을 모두 반환합니다. (query string)"
+    },
+    {
+     "name": "to",
+     "name_ko": "조회 종료일자",
+     "required": false,
+     "description": "조회 종료일자입니다. YYYYMMDD 8자리. from과 함께 사용합니다. (query string)"
+    },
+    {
+     "name": "past_data_incu_yn",
+     "name_ko": "과거데이터포함여부",
+     "required": false,
+     "description": "과거 데이터 포함 여부입니다. \"N\"은 당일 자료만 내려옵니다. 미입력 시 전 영업일 자료가 함께 내려옵니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_index_prices",
+   "name": "해외지수 현재가 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/index/prices",
+   "tr_id": "ohhts_1514_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "조회할 해외 지수의 코드입니다. (예: 나스닥 종합 NAS@IXIC)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_prices",
+   "name": "해외주식 현재가 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/prices",
+   "tr_id": "ohhts_6000_001r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "거래소 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 \"HK\": 홍콩증권거래소 \"SH\": 상하이증권거래소 \"SZ\": 심천증권거래소 \"JP\": 도쿄증권거래소 홍콩·상하이는 dely_rltm_cls_code 를 \"0\" 으로 보내면 오류(IGW50002)가 반환되며 \"1\"(지연)로 조회하십시오. (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL, 홍콩 00700) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연. (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_prices_daytime",
+   "name": "해외주식 주간거래 현재가 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/prices/daytime",
+   "tr_id": "ohhts_6000_017r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ovs_market_prices_after",
+   "name": "해외주식 애프터장 현재가 조회",
+   "category": "overseas_market",
+   "protocol": "REST",
+   "method": "GET",
+   "path": "/market/v1/overseas/prices/after",
+   "tr_id": "ohhts_6000_020r",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "mrkt_div_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "해외 시세는 \"OV\"를 넣습니다. (query string)"
+    },
+    {
+     "name": "mrkt_cls_code",
+     "name_ko": "시장 구분 코드",
+     "required": true,
+     "description": "거래소 구분입니다. \"OQ\": 나스닥 \"NY\": 뉴욕 \"AX\": 아멕스 (query string)"
+    },
+    {
+     "name": "iscd",
+     "name_ko": "종목 코드",
+     "required": true,
+     "description": "해외 종목 심볼을 입력합니다. (예: AAPL) (query string)"
+    },
+    {
+     "name": "dely_rltm_cls_code",
+     "name_ko": "지연실시간구분코드",
+     "required": true,
+     "description": "시세 종류입니다. \"0\": 실시간 \"1\": 지연 (query string)"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_stck_cntg",
+   "name": "(실시간) 국내주식 현재가 (KRX)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-stck-cntg",
+   "tr_id": "ohhts_stck_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_stck_cntg\" 를 넣으십시오. 허용되지 않는 tr_cd 는 WSC00106, tr_key 를 빼면 WSC00108, 빈 값이면 WSC00107 로 거절됩니다."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930 없는 코드나 자릿수가 다른 값을 넣으셔도 구독 응답은 정상(00000)으로 옵니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_nxt_cntg",
+   "name": "(실시간) 국내주식 현재가 (NXT)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-nxt-cntg",
+   "tr_id": "ohhts_nxt_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_nxt_cntg\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_ovtp_cntg",
+   "name": "(실시간) 국내주식 현재가 (시간외단일가)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-ovtp-cntg",
+   "tr_id": "ohhts_ovtp_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_ovtp_cntg\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_stck_aspr",
+   "name": "(실시간) 국내주식 호가",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-stck-aspr",
+   "tr_id": "ohhts_stck_aspr",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_stck_aspr\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_ovtp_aspr",
+   "name": "(실시간) 국내주식 호가 (시간외단일가)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-ovtp-aspr",
+   "tr_id": "ohhts_ovtp_aspr",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_ovtp_aspr\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_ovan_cntg",
+   "name": "(실시간) 국내주식 시간외예상체결가",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-ovan-cntg",
+   "tr_id": "ohhts_ovan_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_ovan_cntg\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_cntg_infr",
+   "name": "(실시간) 주문 접수 통보",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-cntg-infr",
+   "tr_id": "ohhts_cntg_infr",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_cntg_infr\" 를 넣으십시오. tr_key 는 넣지 않아도 됩니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_cntg_rslt",
+   "name": "(실시간) 주문 체결 통보",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-cntg-rslt",
+   "tr_id": "ohhts_cntg_rslt",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_cntg_rslt\" 를 넣으십시오. tr_key 는 넣지 않아도 됩니다."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_unt_cntg",
+   "name": "(실시간) 국내주식 현재가 (SOR 통합)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-unt-cntg",
+   "tr_id": "ohhts_unt_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_unt_cntg\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "단축종목코드",
+     "required": true,
+     "description": "구독할 종목의 단축코드 6자리입니다. 예) 005930"
+    }
+   ]
+  },
+  {
+   "api_type": "ws_exst_aspr",
+   "name": "(실시간) 해외주식 호가",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-exst-aspr",
+   "tr_id": "ohhts_exst_aspr",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_exst_aspr\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "종목코드",
+     "required": true,
+     "description": "구독할 종목을 거래소코드@종목코드 로 넣습니다. 예) \"OQ@NVDA\" 거래소코드는 /reference/v1/overseas/exchanges 의 ovrs_stck_exch_idno 와 같은 체계입니다. \"OQ\" 나스닥 · \"NY\" 뉴욕 · \"AX\" 아멕스 · \"HK\" 홍콩 · \"JP\" 도쿄."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_exst_cntd",
+   "name": "(실시간) 해외주식 현재가 (주간거래)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-exst-cntd",
+   "tr_id": "ohhts_exst_cntd",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_exst_cntd\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "종목코드",
+     "required": true,
+     "description": "구독할 종목을 거래소코드@종목코드 로 넣습니다. 예) \"OQ@NVDA\" 거래소코드는 /reference/v1/overseas/exchanges 의 ovrs_stck_exch_idno 와 같은 체계입니다. \"OQ\" 나스닥 · \"NY\" 뉴욕 · \"AX\" 아멕스 · \"HK\" 홍콩 · \"JP\" 도쿄."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_exst_cntg",
+   "name": "(실시간) 해외주식 현재가 (정규장)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-exst-cntg",
+   "tr_id": "ohhts_exst_cntg",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_exst_cntg\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "종목코드",
+     "required": true,
+     "description": "구독할 종목을 거래소코드@종목코드 로 넣습니다. 예) \"OQ@NVDA\" 거래소코드는 /reference/v1/overseas/exchanges 의 ovrs_stck_exch_idno 와 같은 체계입니다. \"OQ\" 나스닥 · \"NY\" 뉴욕 · \"AX\" 아멕스 · \"HK\" 홍콩 · \"JP\" 도쿄."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_exst_cnta",
+   "name": "(실시간) 해외주식 현재가 (After)",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-exst-cnta",
+   "tr_id": "ohhts_exst_cnta",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_exst_cnta\" 를 넣으십시오."
+    },
+    {
+     "name": "tr_key",
+     "name_ko": "종목코드",
+     "required": true,
+     "description": "구독할 종목을 거래소코드@종목코드 로 넣습니다. 예) \"OQ@NVDA\" 거래소코드는 /reference/v1/overseas/exchanges 의 ovrs_stck_exch_idno 와 같은 체계입니다. \"OQ\" 나스닥 · \"NY\" 뉴욕 · \"AX\" 아멕스 · \"HK\" 홍콩 · \"JP\" 도쿄."
+    }
+   ]
+  },
+  {
+   "api_type": "ws_cntg_exst",
+   "name": "(실시간) 해외주식 주문 접수·체결 통보",
+   "category": "realtime",
+   "protocol": "WEBSOCKET",
+   "method": "SUBSCRIBE",
+   "path": "/websocket/ohhts-cntg-exst",
+   "tr_id": "ohhts_cntg_exst",
+   "state_changing": false,
+   "params": [
+    {
+     "name": "token",
+     "name_ko": "접근토큰",
+     "required": true,
+     "description": "발급받은 접근토큰에 \"Bearer \" 를 붙여 넣습니다. 세션 한도를 넘기면 WSC00110 이 내려옵니다."
+    },
+    {
+     "name": "tr_type",
+     "name_ko": "거래타입",
+     "required": true,
+     "description": "\"1\" 구독 등록 / \"2\" 구독 해지. 해지는 등록과 같은 tr_cd·tr_key 로 보냅니다."
+    },
+    {
+     "name": "tr_cd",
+     "name_ko": "거래코드",
+     "required": true,
+     "description": "이 API 의 구독 코드입니다. \"ohhts_cntg_exst\" 를 넣으십시오."
+    }
+   ]
+  }
+ ]
+}
